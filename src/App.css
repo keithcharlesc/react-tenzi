@@ -9,6 +9,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -17,4 +18,16 @@
   display: grid;
   grid-template-columns: 65px 65px 65px 65px 65px;
   gap: 30.56px;
+}
+
+.roll-button {
+  margin-top: 45px;
+  background-color: #5035ff;
+  border: none;
+  padding: 0.5em 0.75em;
+  color: white;
+  border-radius: 5px;
+  font-size: 22px;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
 }

@@ -7,5 +7,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+}
+
+.die-number {
   font-size: 27px;
+  font-family: "Inter", sans-serif;
 }
