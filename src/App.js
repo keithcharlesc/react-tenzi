@@ -4,6 +4,17 @@ import "./App.css";
 
 export default function App() {
   const [dices, setDices] = React.useState(allNewDice());
+  const [tenzies, setTenzies] = React.useState(false);
+
+  React.useEffect(() => {
+    const allIsHeld = dices.every((die) => die.isHeld);
+    const firstDieValue = dices[0].value;
+    const allIsEqualValue = dices.every((die) => die.value === firstDieValue);
+    if (allIsHeld && allIsEqualValue) {
+      setTenzies(true);
+      alert("CHAMP!!");
+    }
+  }, [dices]);
 
   function allNewDice() {
     const newDice = [];
