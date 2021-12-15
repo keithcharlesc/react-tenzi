@@ -1,0 +1,20 @@
+.app-border {
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  height: 550px;
+  width: 100%;
+  max-width: 550px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 65px 65px 65px 65px 65px;
+  gap: 30.56px;
+}
