@@ -1,9 +1,15 @@
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
 .app-border {
   background-color: #f5f5f5;
   border-radius: 6px;
   height: 550px;
   width: 100%;
   max-width: 550px;
+  padding: 50px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,10 +30,17 @@
   margin-top: 45px;
   background-color: #5035ff;
   border: none;
-  padding: 0.5em 0.75em;
+  padding: 0.6em 1.25em;
   color: white;
   border-radius: 5px;
   font-size: 22px;
   font-family: "Inter", sans-serif;
   cursor: pointer;
+}
+
+.game-description {
+  font-size: 1.2em;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  text-align: center;
 }

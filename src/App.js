@@ -20,14 +20,7 @@ export default function App() {
   function holdDice(id) {
     setDices((prevDices) =>
       prevDices.map((die) => {
-        if (die.id === id) {
-          return {
-            ...die,
-            isHeld: !die.isHeld,
-          };
-        } else {
-          return die;
-        }
+        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
       })
     );
   }
@@ -41,14 +34,29 @@ export default function App() {
     />
   ));
 
-  function handleClick() {
-    setDices(allNewDice());
+  function rollDice() {
+    setDices((prevDices) =>
+      prevDices.map((die) => {
+        return die.isHeld
+          ? die
+          : {
+              value: Math.ceil(Math.random() * 6),
+              isHeld: false,
+              id: die.id,
+            };
+      })
+    );
   }
 
   return (
     <main className="app-border">
+      <h1 className="game-title">Tenzies</h1>
+      <p className="game-description">
+        Roll until all dice are the same. Click each die to freeze it at its
+        current value between rolls.
+      </p>
       <div className="container">{diceElements}</div>
-      <button className="roll-button" onClick={handleClick}>
+      <button className="roll-button" onClick={rollDice}>
         Roll
       </button>
     </main>
