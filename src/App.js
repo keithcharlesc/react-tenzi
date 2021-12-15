@@ -5,18 +5,18 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 
 export default function App() {
-  const [dices, setDices] = React.useState(allNewDice());
+  const [dice, setDice] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
   const { width, height } = useWindowSize();
 
   React.useEffect(() => {
-    const allIsHeld = dices.every((die) => die.isHeld);
-    const firstDieValue = dices[0].value;
-    const allIsEqualValue = dices.every((die) => die.value === firstDieValue);
+    const allIsHeld = dice.every((die) => die.isHeld);
+    const firstDieValue = dice[0].value;
+    const allIsEqualValue = dice.every((die) => die.value === firstDieValue);
     if (allIsHeld && allIsEqualValue) {
       setTenzies(true);
     }
-  }, [dices]);
+  }, [dice]);
 
   function allNewDice() {
     const newDice = [];
@@ -31,14 +31,14 @@ export default function App() {
   }
 
   function holdDice(id) {
-    setDices((prevDices) =>
-      prevDices.map((die) => {
+    setDice((prevDice) =>
+      prevDice.map((die) => {
         return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
       })
     );
   }
 
-  const diceElements = dices.map((die) => (
+  const diceElements = dice.map((die) => (
     <Die
       key={die.id}
       value={die.value}
@@ -48,17 +48,22 @@ export default function App() {
   ));
 
   function rollDice() {
-    setDices((prevDices) =>
-      prevDices.map((die) => {
-        return die.isHeld
-          ? die
-          : {
-              value: Math.ceil(Math.random() * 6),
-              isHeld: false,
-              id: die.id,
-            };
-      })
-    );
+    if (tenzies) {
+      setTenzies(false);
+      setDice(allNewDice());
+    } else {
+      setDice((prevDice) =>
+        prevDice.map((die) => {
+          return die.isHeld
+            ? die
+            : {
+                value: Math.ceil(Math.random() * 6),
+                isHeld: false,
+                id: die.id,
+              };
+        })
+      );
+    }
   }
 
   return (

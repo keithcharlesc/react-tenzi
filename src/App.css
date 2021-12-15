@@ -38,6 +38,14 @@ body {
   cursor: pointer;
 }
 
+.roll-button:active {
+  background-color: #6d57ff;
+  -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+  -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+  box-shadow: inset 0px 0px 5px #c1c1c1;
+  outline: none;
+}
+
 .game-description {
   font-size: 1.2em;
   margin-top: 10px;
