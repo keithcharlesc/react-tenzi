@@ -8,13 +8,37 @@ export default function App() {
   function allNewDice() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push(Math.ceil(Math.random() * 6));
+      newDice.push({
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+        id: i + 1,
+      });
     }
     return newDice;
   }
 
-  const diceElements = dices.map((die, index) => (
-    <Die key={index} value={die} />
+  function holdDice(id) {
+    setDices((prevDices) =>
+      prevDices.map((die) => {
+        if (die.id === id) {
+          return {
+            ...die,
+            isHeld: !die.isHeld,
+          };
+        } else {
+          return die;
+        }
+      })
+    );
+  }
+
+  const diceElements = dices.map((die) => (
+    <Die
+      key={die.id}
+      value={die.value}
+      isHeld={die.isHeld}
+      holdDice={() => holdDice(die.id)}
+    />
   ));
 
   function handleClick() {
