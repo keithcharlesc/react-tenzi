@@ -1,10 +1,13 @@
 import React from "react";
 import Die from "./components/Die";
 import "./App.css";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 export default function App() {
   const [dices, setDices] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
+  const { width, height } = useWindowSize();
 
   React.useEffect(() => {
     const allIsHeld = dices.every((die) => die.isHeld);
@@ -12,7 +15,6 @@ export default function App() {
     const allIsEqualValue = dices.every((die) => die.value === firstDieValue);
     if (allIsHeld && allIsEqualValue) {
       setTenzies(true);
-      alert("CHAMP!!");
     }
   }, [dices]);
 
@@ -60,16 +62,19 @@ export default function App() {
   }
 
   return (
-    <main className="app-border">
-      <h1 className="game-title">Tenzies</h1>
-      <p className="game-description">
-        Roll until all dice are the same. Click each die to freeze it at its
-        current value between rolls.
-      </p>
-      <div className="container">{diceElements}</div>
-      <button className="roll-button" onClick={rollDice}>
-        Roll
-      </button>
-    </main>
+    <div>
+      {tenzies && <Confetti width={width} height={height} />}
+      <main className="app-border">
+        <h1 className="game-title">Tenzies</h1>
+        <p className="game-description">
+          Roll until all dice are the same. Click each die to freeze it at its
+          current value between rolls.
+        </p>
+        <div className="container">{diceElements}</div>
+        <button className="roll-button" onClick={rollDice}>
+          {tenzies ? "Start New Game" : "Roll"}
+        </button>
+      </main>
+    </div>
   );
 }
